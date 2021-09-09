@@ -1,28 +1,42 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="app">
+        <el-container class="app-out-panel">
+            <el-header class="sys-header">系统标题</el-header>
+            <el-container class="app-content-panel">
+                <el-aside width="200px" class="sys-menu">左侧菜单</el-aside>
+                <el-main>地图区域</el-main>
+            </el-container>
+        </el-container>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    name: 'App',
+    components: {},
+};
 </script>
 
 <style>
+html,
+body,
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.app-out-panel,
+.app-content-panel {
+    height: 100%;
+}
+
+.sys-header {
+    background-color: #409eff;
+}
+
+.sys-menu {
+    background-color: #c0c4cc;
 }
 </style>
