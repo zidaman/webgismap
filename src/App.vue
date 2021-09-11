@@ -2,8 +2,30 @@
     <div id="app">
         <el-container class="app-out-panel">
             <el-header class="sys-header">项目系统</el-header>
+
             <el-container class="app-content-panel">
-                <el-aside width="200px" class="sys-menu">菜单栏</el-aside>
+                <el-aside class="sys-menu">
+                    <el-menu
+                        default-active="1"
+                        class="el-menu-vertical-demo"
+                        @open="handleOpen"
+                        @close="handleClose"
+                        background-color="#545c64"
+                        text-color="#fff"
+                        active-text-color="#ffd04b"
+                        :collapse="true"
+                    >
+                        <el-menu-item index="1">
+                            <i class="el-icon-monitor"></i>
+                            <span slot="title">首页大屏</span>
+                        </el-menu-item>
+                        <el-menu-item index="2">
+                            <i class="el-icon-picture-outline"></i>
+                            <span slot="title">一张图显示</span>
+                        </el-menu-item>
+                    </el-menu>
+                </el-aside>
+
                 <el-main class="sys-content">
                     <Mapview />
                 </el-main>
@@ -39,13 +61,15 @@ body,
 }
 
 .sys-header {
-    background-color: #409eff;
+    background-color: #32373e;
     line-height: 60px;
     color: #fff;
     font-size: 20px;
 }
 .sys-menu {
-    background-color: #c0c4cc;
+    background-color: #545c64;
+    width: 64px !important;
+    overflow: hidden !important;
 }
 .sys-content {
     padding: 5px !important;
