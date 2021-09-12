@@ -21,7 +21,7 @@ export default {
     components: {},
 
     mounted: function () {
-        console.log(this.$store.state._defaultView);
+        // console.log(this.$store.state._defaultView);
         this._createMapView();
     },
 
