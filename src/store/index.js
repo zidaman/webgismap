@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 const state = {
     _defaultView: '',    //默认地图view
-    _defaultMapTreeVisible: false,
+    _defaultMapTreeVisible: false,    //地图目录树显示/隐藏
 };
 
 const getters = {
