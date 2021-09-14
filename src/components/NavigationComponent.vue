@@ -163,6 +163,7 @@ export default {
                 serverUrl =
                     'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/County_WebMercator/FeatureServer/0';
             }
+            //。添加绑定事件才到省
             const [QueryTask, Query, Graphic] = await loadModules(
                 ['esri/tasks/QueryTask', 'esri/tasks/support/Query', 'esri/Graphic'],
                 options,
@@ -215,8 +216,8 @@ export default {
     position: absolute;
     top: 20px;
     left: 15px;
-    width: 500px;
-    height: 600px;
+    width: 300px;
+    height: 400px;
     background-color: #fff;
 }
 .navigateComponent-header {
@@ -249,7 +250,7 @@ export default {
 }
 .navigate-content-pannel {
     width: 100%;
-    height: 525px;
+    height: 325px;
     overflow: auto;
     padding: 0 5px;
     box-sizing: border-box;

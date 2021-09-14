@@ -43,19 +43,19 @@ export default {
                             label: '省数据',
                             layerid: 'layerid',
                             layerurl:
-                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/proProvince_WebMercator/FeatureServer',
+                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/Province_WebMercator/FeatureServer',
                         },
                         {
                             label: '市数据',
                             layerid: 'layerid',
                             layerurl:
-                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/proCity_WebMercator/FeatureServer',
+                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/City_WebMercator/FeatureServer',
                         },
                         {
                             label: '县数据',
                             layerid: 'layerid',
                             layerurl:
-                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/proCounty_WebMercator/FeatureServer',
+                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/County_WebMercator/FeatureServer',
                         },
                     ],
                 },
