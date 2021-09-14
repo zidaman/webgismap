@@ -16,9 +16,10 @@ export default {
             console.log(e.target.id);
             switch (e.target.id) {
                 case 'navigation':
+                    this.openNavigate();
                     break;
                 case 'maptree':
-                    this.open();
+                    this.openMapTree();
                     break;
                 case 'distance':
                     break;
@@ -30,7 +31,11 @@ export default {
                     break;
             }
         },
-        open() {
+        openNavigate() {
+            const currentVisible = this.$store.getters._getDefaultNavigateVisible;
+            this.$store.commit('_setDefaultNavigateVisible', !currentVisible);
+        },
+        openMapTree() {
             const currentVisible = this.$store.getters._getDefaultMapTreeVisible;
             this.$store.commit('_setDefaultMapTreeVisible', !currentVisible);
         },
