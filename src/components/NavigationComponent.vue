@@ -270,7 +270,7 @@ export default {
 .county-item:hover {
     color: #409eff;
 }
-tr {
+.navigateComponent-pannel tr {
     display: block; /*将tr设置为块体元素*/
     margin-bottom: 15px; /*设置tr间距为15px*/
 }

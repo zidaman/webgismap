@@ -7,6 +7,8 @@ const state = {
     _defaultView: '',    //默认地图view
     _defaultMapTreeVisible: false,    //地图目录树显示/隐藏
     _defaultNavigateVisible: false,    //行政区划面板显示/隐藏
+    _defaultQueryResultVisible: false,    //空间查询结果面板    
+    _defaultQueryResult: [],    //空间查询结果
 };
 
 const getters = {
@@ -18,6 +20,12 @@ const getters = {
     },
     _getDefaultNavigateVisible() {
         return state._defaultNavigateVisible;
+    },
+    _getDefaultQueryResultVisible() {
+        return state._defaultQueryResultVisible;
+    },
+    _getDefaultQueryResult() {
+        return state._defaultQueryResult;
     }
 };
 
@@ -30,6 +38,12 @@ const mutations = {
     },
     _setDefaultNavigateVisible(state, value) {
         state._defaultNavigateVisible = value;
+    },
+    _setDefaultQueryResultVisible(state, value) {
+        state._defaultQueryResultVisible = value;
+    },
+    _setDefaultQueryResult(state, value) {
+        state._defaultQueryResult = value;
     }
 }
 

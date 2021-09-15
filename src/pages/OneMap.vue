@@ -4,6 +4,7 @@
         <MapTools />
         <MapTree />
         <NavigationComponent />
+        <ResultTable />
     </div>
 </template>
 
@@ -12,6 +13,7 @@ import Mapview from './../components/common/Mapview';
 import MapTools from './../components/MapTools';
 import MapTree from './../components/MapTree';
 import NavigationComponent from './../components/NavigationComponent';
+import ResultTable from './../components/ResultTable';
 
 export default {
     name: 'OneMap',
@@ -20,6 +22,7 @@ export default {
         MapTools,
         MapTree,
         NavigationComponent,
+        ResultTable,
     },
     methods: {},
 };
