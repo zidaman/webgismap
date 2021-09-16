@@ -31,7 +31,54 @@ const options = {
 
 export default {
     name: 'MapTools',
+    mounted: function () {
+        const checkView = setInterval(() => {
+            if (this.$store.getters._getDefaultView) {
+                this._initSketchTool();
+                clearInterval(checkView);
+            }
+        }, 200);
+    },
     methods: {
+        //0初始化绘制工具
+        async _initSketchTool() {
+            const _self = this;
+            const view = _self.$store.getters._getDefaultView;
+            //1、绘制面状区域
+            const [SketchViewModel, GraphicsLayer] = await loadModules(
+                ['esri/widgets/Sketch/SketchViewModel', 'esri/layers/GraphicsLayer'],
+                options,
+            );
+            //移除已添加图层
+            const resultLayer = view.map.findLayerById('polygonGraphicLayer');
+            if (resultLayer) view.map.remove(resultLayer);
+
+            _self.graphicsLayer = new GraphicsLayer({
+                id: 'polygonGraphicLayer',
+                elevationInfo: {
+                    mode: 'on-the-ground',
+                },
+            });
+            view.map.add(_self.graphicsLayer);
+
+            const polygonSymbol = {
+                type: 'simple-fill', // autocasts as new SimpleFillSymbol()
+                color: 'rgba(216,30,6, 0.4)',
+                style: 'solid',
+                outline: {
+                    // autocasts as new SimpleLineSymbol()
+                    color: '#d81e06',
+                    width: 1,
+                },
+            };
+
+            _self.sketchViewModel = new SketchViewModel({
+                updateOnGraphicClick: false,
+                view,
+                layer: _self.graphicsLayer,
+                polygonSymbol,
+            });
+        },
         handleMapToolsitemClick(e) {
             switch (e.target.id) {
                 case 'navigation':
@@ -76,51 +123,17 @@ export default {
         //1初始化空间查询
         async initSpaceQuery() {
             const _self = this;
-            const view = _self.$store.getters._getDefaultView;
-            //1、绘制面状区域
-            const [SketchViewModel, GraphicsLayer, Graphic] = await loadModules(
-                ['esri/widgets/Sketch/SketchViewModel', 'esri/layers/GraphicsLayer', 'esri/Graphic'],
-                options,
-            );
-            //移除已添加图层
-            const resultLayer = view.map.findLayerById('polygonGraphicLayer');
-            if (resultLayer) view.map.remove(resultLayer);
+            const [Graphic] = await loadModules(['esri/Graphic'], options);
+            _self.sketchViewModel.create('polygon');
 
-            const graphicsLayer = new GraphicsLayer({
-                id: 'polygonGraphicLayer',
-                elevationInfo: {
-                    mode: 'on-the-ground',
-                },
-            });
-            view.map.add(graphicsLayer);
-
-            const polygonSymbol = {
-                type: 'simple-fill', // autocasts as new SimpleFillSymbol()
-                color: 'rgba(216,30,6, 0.4)',
-                style: 'solid',
-                outline: {
-                    // autocasts as new SimpleLineSymbol()
-                    color: '#d81e06',
-                    width: 1,
-                },
-            };
-
-            var sketchViewModel = new SketchViewModel({
-                updateOnGraphicClick: false,
-                view,
-                layer: graphicsLayer,
-                polygonSymbol,
-            });
-            sketchViewModel.create('polygon');
-
-            sketchViewModel.on('creat-complete', function (event) {
+            _self.sketchViewModel.on('create-complete', function (event) {
                 const graphic = new Graphic({
                     geometry: event.geometry,
-                    symbol: sketchViewModel.grahic.symbol,
+                    symbol: _self.sketchViewModel.grahic.symbol,
                 });
-                graphicsLayer.add(graphic);
+                _self.graphicsLayer.add(graphic);
             });
-            sketchViewModel.on('creat', function (event) {
+            _self.sketchViewModel.on('create', function (event) {
                 if (event.state == 'complete') {
                     // console.log(graphicsLayer);
                     // console.log(event);
@@ -170,7 +183,7 @@ export default {
                         currentData.length = 0;
                     }
                     _self.$message({
-                        message: '查询成功,共查到${results.features.length}条数据',
+                        message: `查询成功,共查到${results.features.length}条数据`,
                         type: 'success',
                     });
                     _self.$store.commit('_setDefaultQueryResult', currentData);
