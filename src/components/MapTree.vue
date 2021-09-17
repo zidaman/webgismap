@@ -68,6 +68,18 @@ export default {
                             layerurl:
                                 'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/proStation_WebMercator/FeatureServer',
                         },
+                        {
+                            label: '卷帘省级top',
+                            layerid: 'swipeLayerTop',
+                            layerurl:
+                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/Province_WebMercator/FeatureServer',
+                        },
+                        {
+                            label: '卷帘市级bottom',
+                            layerid: 'swipeLayerBottom',
+                            layerurl:
+                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/City_WebMercator/FeatureServer',
+                        },
                     ],
                 },
             ],
