@@ -13,10 +13,7 @@
 <script>
 import { loadModules } from 'esri-loader';
 
-const options = {
-    url: 'https://js.arcgis.com/4.18/init.js',
-    css: 'https://js.arcgis.com/4.18/esri/themes/light/main.css',
-};
+import config from './../config';
 
 export default {
     name: 'Mapview',
@@ -51,7 +48,7 @@ export default {
                     'esri/widgets/ScaleBar',
                     'esri/widgets/Zoom',
                 ],
-                options,
+                config.options,
             );
 
             let basemap = new Basemap({
@@ -108,7 +105,7 @@ export default {
             document.getElementById('zoom').innerHTML = '';
             const [Map, SceneView, Basemap, TileLayer] = await loadModules(
                 ['esri/Map', 'esri/views/SceneView', 'esri/Basemap', 'esri/layers/TileLayer'],
-                options,
+                config.options,
             );
 
             let basemap = new Basemap({

@@ -24,11 +24,7 @@
 
 <script>
 import { loadModules } from 'esri-loader';
-
-const options = {
-    url: 'https://js.arcgis.com/4.18/init.js',
-    css: 'https://js.arcgis.com/4.18/esri/themes/light/main.css',
-};
+import config from './config';
 
 export default {
     name: 'MapTools',
@@ -94,7 +90,7 @@ export default {
         async initDistanceMap() {
             const _self = this;
             const view = _self.$store.getters._getDefaultView;
-            const [DistanceMeasurement2D] = await loadModules(['esri/widgets/DistanceMeasurement2D'], options);
+            const [DistanceMeasurement2D] = await loadModules(['esri/widgets/DistanceMeasurement2D'], config.options);
             if (_self.measurementWidget) _self.measurementWidget.destroy();
             _self.measurementWidget = new DistanceMeasurement2D({
                 view,
@@ -105,7 +101,7 @@ export default {
         //02地图面积量算
         async initAreaMap() {
             const view = this.$store.getters._getDefaultView;
-            const [AreaMeasurement2D] = await loadModules(['esri/widgets/AreaMeasurement2D'], options);
+            const [AreaMeasurement2D] = await loadModules(['esri/widgets/AreaMeasurement2D'], config.options);
             if (this.measurementWidget) this.measurementWidget.destroy();
             this.measurementWidget = new AreaMeasurement2D({
                 view,
@@ -117,7 +113,7 @@ export default {
         async initSwipe() {
             const _self = this;
             const view = _self.$store.getters._getDefaultView;
-            const [Swipe] = await loadModules(['esri/widgets/Swipe'], options);
+            const [Swipe] = await loadModules(['esri/widgets/Swipe'], config.options);
             const topLayer = view.map.findLayerById('swipeLayerTop');
             const bottomLayer = view.map.findLayerById('swipeLayerBottom');
             if (topLayer && bottomLayer) {
@@ -145,7 +141,7 @@ export default {
             //1、绘制面状区域
             const [SketchViewModel, GraphicsLayer] = await loadModules(
                 ['esri/widgets/Sketch/SketchViewModel', 'esri/layers/GraphicsLayer'],
-                options,
+                config.options,
             );
             //移除已添加图层
             const resultLayer = view.map.findLayerById('polygonGraphicLayer');
@@ -183,7 +179,10 @@ export default {
             const _self = this;
 
             const view = _self.$store.getters._getDefaultView;
-            const [Graphic, GraphicsLayer] = await loadModules(['esri/Graphic', 'esri/layers/GraphicsLayer'], options);
+            const [Graphic, GraphicsLayer] = await loadModules(
+                ['esri/Graphic', 'esri/layers/GraphicsLayer'],
+                config.options,
+            );
             const resultLayer = view.map.findLayerById('polygonGraphicLayer');
             if (resultLayer) view.map.remove(resultLayer);
             _self.graphicsLayer = new GraphicsLayer({
@@ -268,7 +267,7 @@ export default {
         //3符号化渲染图层
         async renderResultLayer(resultFeatures) {
             const view = this.$store.getters._getDefaultView;
-            const [FeatureLayer] = await loadModules(['esri/layers/FeatureLayer'], options);
+            const [FeatureLayer] = await loadModules(['esri/layers/FeatureLayer'], config.options);
             //移除已添加图层
             const resultLayer = view.map.findLayerById('initResultLayer');
             if (resultLayer) view.map.remove(resultLayer);
@@ -373,7 +372,7 @@ export default {
             const view = _self.$store.getters._getDefaultView;
             const [PrintTask, PrintTemplate, PrintParameters] = await loadModules(
                 ['esri/tasks/PrintTask', 'esri/tasks/support/PrintTemplate', 'esri/tasks/support/PrintParameters'],
-                options,
+                config.options,
             );
 
             let printTask = new PrintTask({
